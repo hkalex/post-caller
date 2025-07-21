@@ -5,39 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        var intervalObj = null;
+        const POPUP_DOMAIN = "https://post-receiver.pages.dev"
         var newTab = null;
 
-        function receiveMessage() {
-            window.addEventListener("message", event => {
-                console.log("PARENT:" + event.origin)
-                if (event.origin == "https://post-receiver.pages.dev") {
-                    console.log("Replied" + event.data)
-                }
-            })
-        }
-
+        window.addEventListener("message", event => {
+            if (event.origin == POPUP_DOMAIN) {
+                console.log("Replied" + event.data)
+            }
+        })
+        
         function openNewTab() {
-            newTab = window.open("https://post-receiver.pages.dev/", "_blank")
+            newTab = window.open(POPUP_DOMAIN, "_blank")
         }
 
         receiveMessage();
-
-        function startPostMessage() {
-            newTab.postMessage("Ready?", "*")
-        }
-
-        function stopPostMessage() {
-            if (intervalObj) {
-                clearInterval(intervalObj)
-            }
-        }
     </script>
 </head>
 <body>
     Caller
     <button onclick="openNewTab()">OpenNewTab()</button>
-    <button onclick="startPostMessage()">start()</button>
-    <button onclick="stopPostMessage()">stop()</button>
 </body>
 </html>
