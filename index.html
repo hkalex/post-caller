@@ -12,7 +12,7 @@
             window.addEventListener("message", event => {
                 console.log("PARENT:" + event.origin)
                 if (event.origin == "https://post-receiver.pages.dev") {
-                    console.log("Replied")
+                    console.log("Replied" + event.data)
                 }
             })
         }
@@ -24,9 +24,7 @@
         receiveMessage();
 
         function startPostMessage() {
-            intervalObj = setInterval(() => {
-                newTab.postMessage("Ready?", "*")
-            }, 1000)
+            newTab.postMessage("Ready?", "*")
         }
 
         function stopPostMessage() {
