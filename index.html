@@ -7,13 +7,14 @@
     <script>
         function sendHello() {
             setInterval(() => {
-                window.postMessage("Hi", "post-receiver.pages.dev")
+                window.postMessage("Hi", "https://post-receiver.pages.dev")
             }, 1000)
         }
 
         function receiveMessage() {
             window.addEventListener("message", event => {
-                if (event.source == "post-receiver.pages.dev") {
+                console.log(event.source)
+                if (event.source == "https://post-receiver.pages.dev") {
                     console.log("Replied")
                 }
             })
