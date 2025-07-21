@@ -6,10 +6,11 @@
     <title>Document</title>
     <script>
         var intervalObj = null;
+        var newTab = null;
 
         function receiveMessage() {
             window.addEventListener("message", event => {
-                console.log(event.origin)
+                console.log("PARENT:" + event.origin)
                 if (event.origin == "https://post-receiver.pages.dev") {
                     console.log("Replied")
                 }
@@ -17,7 +18,7 @@
         }
 
         function openNewTab() {
-            var newtab = window.open("https://post-receiver.pages.dev/", "_blank")
+            newTab = window.open("https://post-receiver.pages.dev/", "_blank")
         }
 
         receiveMessage();
@@ -26,6 +27,8 @@
             intervalObj = setInterval(() => {
                 window.postMessage("Hi", "https://post-receiver.pages.dev/")
             }, 1000)
+
+            newTab.postMessage("Hi3", "*")
         }
 
         function stopPostMessage() {
