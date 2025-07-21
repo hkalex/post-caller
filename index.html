@@ -21,13 +21,19 @@
         })
         
         function openNewTab() {
-            newTab = window.open(POPUP_DOMAIN + POPUP_PAGE, "_blank")
+            var token = document.getElementById("token").value;
+            var fullUrl = POPUP_DOMAIN + POPUP_PAGE
+            if (token) {
+                fullUrl += "?token=" + token
+            }
+            newTab = window.open(fullUrl, "_blank")
         }
 
     </script>
 </head>
 <body>
     Caller
+    Token: <input type="text" name="" id="token">
     <button onclick="openNewTab()">OpenNewTab()</button>
 </body>
 </html>
