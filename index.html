@@ -5,31 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        function sendHello() {
-            setInterval(() => {
-                window.postMessage("Hi", "https://post-receiver.pages.dev")
-            }, 1000)
-        }
+        var intervalObj = null;
 
         function receiveMessage() {
             window.addEventListener("message", event => {
-                console.log(event.source)
-                if (event.source == "https://post-receiver.pages.dev") {
+                console.log(event.origin)
+                if (event.origin == "https://post-receiver.pages.dev") {
                     console.log("Replied")
                 }
             })
         }
 
-        function OpenNewTab() {
+        function openNewTab() {
             var newtab = window.open("https://post-receiver.pages.dev/", "_blank")
-            sendHello();
         }
 
         receiveMessage();
+
+        function startPostMessage() {
+            intervalObj = setInterval(() => {
+                window.postMessage("Hi", "https://post-receiver.pages.dev")
+            }, 1000)
+        }
+
+        function stopPostMessage() {
+            if (intervalObj) {
+                clearInterval(intervalObj)
+            }
+        }
     </script>
 </head>
 <body>
     Caller
-    <button onclick="OpenNewTab()">OpenNewTab()</button>
+    <button onclick="openNewTab()">OpenNewTab()</button>
+    <button onclick="startPostMessage()">start()</button>
+    <button onclick="stopPostMessage()">stop()</button>
 </body>
 </html>
