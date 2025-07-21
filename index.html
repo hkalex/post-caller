@@ -6,6 +6,7 @@
     <title>Document</title>
     <script>
         const POPUP_DOMAIN = "https://post-receiver.pages.dev"
+        const POPUP_PAGE = "/Landing.html"
         var newTab = null;
 
         window.addEventListener("message", event => {
@@ -15,7 +16,7 @@
         })
         
         function openNewTab() {
-            newTab = window.open(POPUP_DOMAIN, "_blank")
+            newTab = window.open(POPUP_DOMAIN + POPUP_PAGE, "_blank")
         }
 
         receiveMessage();
