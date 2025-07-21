@@ -5,13 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        function OpenNewTab() {
-            alert("OpenNewTab")
+        function sendHello() {
+            setInterval(() => {
+                window.postMessage("Hi", "post-receiver.pages.dev")
+            }, 1000)
         }
+
+        function receiveMessage() {
+            window.addEventListener("message", event => {
+                if (event.source == "post-receiver.pages.dev") {
+                    console.log("Replied")
+                }
+            })
+        }
+
+        function OpenNewTab() {
+            var newtab = window.open("https://post-receiver.pages.dev/", "_blank")
+            sendHello();
+        }
+
+        receiveMessage();
     </script>
 </head>
 <body>
     Caller
-    <button onclick="OpenNewTab()"></button>
+    <button onclick="OpenNewTab()">OpenNewTab()</button>
 </body>
 </html>
