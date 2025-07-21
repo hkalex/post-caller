@@ -6,12 +6,17 @@
     <title>Document</title>
     <script>
         const POPUP_DOMAIN = "https://post-receiver.pages.dev"
-        const POPUP_PAGE = "/index.html"
+        const POPUP_PAGE = "/Landing.html"
         var newTab = null;
 
+        const data_to_popup = JSON.stringify({
+            "firstName": "Alex",
+            "lastName": "Yeung"
+        })
+
         window.addEventListener("message", event => {
-            if (event.origin == POPUP_DOMAIN) {
-                console.log("Replied" + event.data)
+            if (event.origin == POPUP_DOMAIN && event.data == "READY") {
+                newTab.postMessage(data_to_popup, POPUP_DOMAIN)
             }
         })
         
