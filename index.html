@@ -25,10 +25,8 @@
 
         function startPostMessage() {
             intervalObj = setInterval(() => {
-                window.postMessage("Hi", "https://post-receiver.pages.dev/")
+                newTab.postMessage("Ready?", "*")
             }, 1000)
-
-            newTab.postMessage("Hi3", "*")
         }
 
         function stopPostMessage() {
