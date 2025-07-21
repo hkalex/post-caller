@@ -15,7 +15,8 @@
         })
 
         window.addEventListener("message", event => {
-            if (event.origin == POPUP_DOMAIN && event.data == "READY") {
+            if (event.origin == POPUP_DOMAIN && event.data == "READY") { // Wait for a "READY" message from POPUP
+                // send data to the POPUP
                 newTab.postMessage(data_to_popup, POPUP_DOMAIN)
             }
         })
